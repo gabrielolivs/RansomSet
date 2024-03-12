@@ -84,4 +84,10 @@ The hierarchical structure of the JSON file illustrated in the Figure below is o
 
 Each system call in the calls section is identified by an integer from 0 to N in block 5, with N being the total number of system calls performed per binary. This value can be significantly high, exceeding 1,000 or even 10,000 calls. Within each system call, the names of the APIs invoked during the malware's operation are recorded. These names are collected and counted on the first occurrence of each API. If there is a subsequent call to the same API, one more is added to the count, allowing evaluation of the number of times the binary has executed that specific system call.
 
-![image]()
+![ca (1)](https://github.com/gabrielolivs/RansomSet/assets/51774020/90bc0c01-727f-4842-8608-5250cedd0a36)
+
+## Dataset Analysis
+
+The dataset generated during the research development possesses an organized structure aimed at facilitating comprehension and utilization of the data. The figure below illustrates the file structure, wherein each line corresponds to an observation, signifying the execution of a distinct malware instance, while the columns delineate the characteristics gathered during said execution. These columns encompass various fields including scores, ransomware classes (where applicable), particulars concerning system calls made by the binaries, and other pertinent aspects crucial for threat identification and classification.
+
+
