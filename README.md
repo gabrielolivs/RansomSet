@@ -90,4 +90,6 @@ Each system call in the calls section is identified by an integer from 0 to N in
 
 The dataset generated during the research development possesses an organized structure aimed at facilitating comprehension and utilization of the data. The figure below illustrates the file structure, wherein each line corresponds to an observation, signifying the execution of a distinct malware instance, while the columns delineate the characteristics gathered during said execution. These columns encompass various fields including scores, ransomware classes (where applicable), particulars concerning system calls made by the binaries, and other pertinent aspects crucial for threat identification and classification.
 
+![dataset drawio-corrigido2 (1)](https://github.com/gabrielolivs/RansomSet/assets/51774020/12a47532-d6f9-448b-b4cd-144b0298349d)
+
 
