@@ -92,4 +92,79 @@ The dataset generated during the research development possesses an organized str
 
 ![dataset drawio-corrigido2 (1)](https://github.com/gabrielolivs/RansomSet/assets/51774020/12a47532-d6f9-448b-b4cd-144b0298349d)
 
+## Experimental Evaluation
 
+To evaluate the dataset’s applicability, experiments were conducted using the XGBoost model, due to its high predictive power and explainability compatibility with SHAP (SHapley Additive Explanations).
+The objective was to assess the model’s capability in classifying ransomware families and benign samples, as well as to measure the computational benefits of feature selection.
+
+Two versions of the dataset were used:
+
+1. **Full Dataset:** containing all 240 extracted system call features.
+
+2. **IG-Ranked Dataset:** reduced version with only the Top 25 features ranked by Information Gain (IG).
+
+## Model Explainability (SHAP)
+
+To interpret the model’s decisions, the SHAP framework was applied to the XGBoost results. This method computes the contribution of each feature to the final prediction, offering transparency to the machine learning process.
+
+**Most influential system calls include:**
+
+* `NtAllocateVirtualMemory` – Memory allocation events.
+
+* `NtClose` – Handle termination operations.
+
+* `NtTerminateProcess` – Process control and termination.
+
+* `NtOpenKey` / `NtQueryValueKey` – Registry manipulation.
+
+* `SetUnhandledExceptionFilter` – Exception flow control interception.
+
+<img width="430" height="57" alt="image" src="https://github.com/user-attachments/assets/c9318a19-b965-47fc-ac7d-b33561b14ab6" />
+
+
+## Practical Implications
+
+The RansomSet dataset can be leveraged by both academia and industry.
+Its structure and documentation make it a useful tool for several domains:
+
+* **Benchmarking:** Evaluate and compare machine learning models for ransomware detection.
+
+* **Feature Selection Studies:** Test and validate dimensionality reduction methods.
+
+* **Cyber Threat Intelligence:** Identify patterns and operational behaviors of malware families.
+
+* **Educational Use:** Serve as a didactic dataset for cybersecurity courses and labs.
+
+## Limitations
+
+Despite its comprehensiveness, RansomSet has natural limitations that must be considered:
+
+1. Scope: Limited to six ransomware families and 23 benign binaries.
+
+2. Controlled Environment: All samples were analyzed within a single Windows 7 VM instance.
+
+3. Sandbox Evasion: Some ransomware may detect and alter behavior when executed in sandboxed conditions.
+
+Future expansions will aim to include modern operating systems (Windows 10/11) and new ransomware variants, improving diversity and robustness.
+
+## Conclusion and Future Work
+
+The RansomSet dataset was developed to address the lack of modern, explainable, and publicly available ransomware data. By combining dynamic behavioral analysis, Information Gain feature selection, and SHAP-based interpretability, it offers a foundation for reproducible and explainable research in malware detection.
+
+# Key Highlights:
+
+* Public, structured dataset for multiclass ransomware detection.
+
+* Compatible with modern system call environments.
+
+* Achieves 99% F1-score with interpretable features.
+
+* Fully open for replication and extension
+
+## Future Work:
+
+* Integration with **live Intrusion Detection Systems (IDS/EDR)**.
+
+* Addition of **new malware and benign families**.
+
+* Development of **lightweight detection agents** for real-time environments
