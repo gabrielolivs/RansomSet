@@ -12,28 +12,28 @@ The Python function capture_columns is responsible for processing a list of JSON
 When executed with a list of JSON files as input, capture_columns meticulously scans to capture the relevant features of each file, represented by the system calls present. This process is crucial for subsequent analyses, such as pattern detection or training machine learning models. Therefore, the function plays a fundamental role in data extraction and preparation, providing a solid foundation for future investigations or applications related to cybersecurity.
 
 ```py
-def captura_colunas(dir_list):
-    print("Iniciando a captura de features na função")
-    colunas = []
-    contador = 0
+def capture_columns(dir_list):
+    print("Starting feature capture in function")
+    columns = []
+    counter = 0
 
-    for arquivo in dir_list:
+    for file in dir_list:
         try:
-            with open(arquivo, 'r', encoding='utf8') as f:
+            with open(file, 'r', encoding='utf8') as f:
                 data = json.load(f)
-                print("Lendo a classe = " + str(data['target']['file']['name']) + " Contador = " + str(contador) + " do arquivo => " + arquivo)
-                for i in data['behavior']['processes']:
-                    for j in i['calls']:
-                        api = j['api']
-                        if api not in colunas:
-                            colunas.append(api)
-                contador += 1
+                print("Reading class = " + str(data['target']['file']['name']) + 
+                      " Counter = " + str(counter) + " from file => " + file)
+                for process in data['behavior']['processes']:
+                    for call in process['calls']:
+                        api = call['api']
+                        if api not in columns:
+                            columns.append(api)
+                counter += 1
         except json.decoder.JSONDecodeError as e:
-            print(f"Erro ao decodificar JSON no arquivo {arquivo}: {e}")
-            continue  #-- Continua para o próximo arquivo
-    print("Retornando colunas de features!")
-    return colunas
-
+            print(f"Error decoding JSON in file {file}: {e}")
+            continue  #-- Continue to the next file
+    print("Returning feature columns!")
+    return columns
 ```
 The json_arq function in Python performs the following tasks:
 
@@ -47,33 +47,35 @@ Overall, this function facilitates the conversion of JSON data into a structured
 
 
 ```py
-def json_arq(dir_arq, colunas):
-    with open('C:\\Users\\gabri\\OneDrive\\Área de Trabalho\\Foletto\\QuasarRAT\\Dataset_QuasarRAT.csv', 'a', newline='', encoding='utf-8') as arquivo_csv:
-        writer = csv.writer(arquivo_csv)
-        col_aux = ['timestamp','classe', 'score_binary']
-        writer.writerow(col_aux + colunas)
+def json_file(dir_list, columns):
+    with open('C:\\Users\\gabri\\OneDrive\\Desktop\\Foletto\\QuasarRAT\\Dataset_QuasarRAT.csv', 'a', newline='', encoding='utf-8') as csv_file:
+        writer = csv.writer(csv_file)
+        header = ['timestamp', 'class', 'score_binary']
+        writer.writerow(header + columns)
 
-        for arquivo in dir_arq:
-            print("Nome do arquivo: " + arquivo)  # Nome do arquivo
-            with open(arquivo, 'r', encoding='utf8') as f:
+        for file in dir_list:
+            print("File name: " + file)  # File name
+            with open(file, 'r', encoding='utf8') as f:
                 data = json.load(f)
 
                 for i, process in enumerate(data['behavior']['processes']):
-                    if data['target']['file']['name'] not in ['WannaCry', 'Ryuk', 'LockBit', 'Conti', 'Sodinikibi','CryptoLocker']:
-                        classe = 'Normal'
+                    if data['target']['file']['name'] not in ['WannaCry', 'Ryuk', 'LockBit', 'Conti', 'Sodinikibi', 'CryptoLocker']:
+                        file_class = 'Normal'
                     else:
-                        classe = data['target']['file']['name']
+                        file_class = data['target']['file']['name']
+
                     timestamp = process['time']
-                    print("Incluindo Classe -> " + classe)
-                    #-- Score do binário
+                    print("Including Class -> " + file_class)
+                    #-- Binary score
                     score = data['info']['score']
                     print("========================================")
 
                     calls = [call['api'] for call in process['calls']]
-                    numeros = [calls.count(coluna) for coluna in colunas]
+                    counts = [calls.count(column) for column in columns]
 
-                    print("Incluindo Contagem de chamadas -> " + classe)
-                    writer.writerow([classe,score] + numeros)
+                    print("Including Call Counts -> " + file_class)
+                    writer.writerow([file_class, score] + counts)
+
 ```
 
 ## Starting 
