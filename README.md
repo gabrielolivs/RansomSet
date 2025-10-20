@@ -179,3 +179,6 @@ The RansomSet dataset was developed to address the lack of modern, explainable, 
 * Addition of **new malware and benign families**.
 
 * Development of **lightweight detection agents** for real-time environments
+
+See the complete list of references in [docs/references.md](docs/references.md)
+
