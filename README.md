@@ -78,7 +78,18 @@ def json_arq(dir_arq, colunas):
 
 ## Starting 
 
+### Setup & Requirements
+
 To run the created script, it is recommended to install the [Anaconda](https://www.anaconda.com/products/distribution) software and that the machine you are using has at least 8GB of RAM memory.
+
+* Install [Anaconda](https://anaconda.org/)
+
+* Ensure at least 8GB of RAM
+
+* Required libraries: json, csv, pandas, numpy
+
+
+### JSON File Hierarchy
 
 The hierarchical structure of the JSON file illustrated in the Figure below is organized into specific specifications for different data sets. Each section is clearly labeled, making malware analysis information easy to identify and interpret. In this study, system calls were used as resources to analyze ransomware behavior. Within the root section, in block 1, the behavior section was selected to capture the data. In this section you will find processes in block 2, which store the executions carried out by each binary during its execution in the Cuckoo Sandbox environment. Additionally, there is a subsection called calls in block 3, which contains all the system calls made by the binary during its execution.
 
@@ -139,19 +150,19 @@ Its structure and documentation make it a useful tool for several domains:
 
 Despite its comprehensiveness, RansomSet has natural limitations that must be considered:
 
-1. Scope: Limited to six ransomware families and 23 benign binaries.
+1. **Scope:** Limited to six ransomware families and 23 benign binaries.
 
-2. Controlled Environment: All samples were analyzed within a single Windows 7 VM instance.
+2. **Controlled Environment:** All samples were analyzed within a single Windows 7 VM instance.
 
-3. Sandbox Evasion: Some ransomware may detect and alter behavior when executed in sandboxed conditions.
+3. **Sandbox Evasion:** Some ransomware may detect and alter behavior when executed in sandboxed conditions.
 
-Future expansions will aim to include modern operating systems (Windows 10/11) and new ransomware variants, improving diversity and robustness.
+> Future updates will expand coverage to **Windows 10/11** and incorporate **new ransomware families**.
 
 ## Conclusion and Future Work
 
 The RansomSet dataset was developed to address the lack of modern, explainable, and publicly available ransomware data. By combining dynamic behavioral analysis, Information Gain feature selection, and SHAP-based interpretability, it offers a foundation for reproducible and explainable research in malware detection.
 
-# Key Highlights:
+### Key Highlights:
 
 * Public, structured dataset for multiclass ransomware detection.
 
